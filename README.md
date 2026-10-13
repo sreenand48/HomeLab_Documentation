@@ -36,15 +36,18 @@ difficulty of managing a server while pursuing my degree away from my home.
 
 ## Netbootxyz Setup
 1. Install any supported linux distro on your netboot server with dnsmasq
-2. Configure dnsmasq by setting ```bash dhcp-option=66,"0.0.0.0" ``` and configure tftp using ```bash enable-tftp
+2. Configure dnsmasq by setting ```bash dhcp-option=66,"0.0.0.0" ``` and configure tftp using
+```bash
+enable-tftp
 tftp-root=/var/lib/tftp
-dhcp-boot=netboot.xyz.kpxe ```
-3. Run the docker installation of the netbootxyz server image
-4. On the router settings, pin the IP address of the netboot server and also pin the DHCP server responsibility to the server.
-5. Go to the web interface for the netbootxyz docker image and download the OS images you are most likely to use
-6. Configure the boot.cfg settings change the live_endpoint to your server's IP
-7. After that, plug in your target device via an ethernet cable to your router and boot it up selecting the NIC as an option
-8. It will boot up with a netbootxyz page, from which you can select which OS you want to load. It will copy the OS image to ram via the ethernet cable
+dhcp-boot=netboot.xyz.kpxe
+```
+4. Run the docker installation of the netbootxyz server image
+5. On the router settings, pin the IP address of the netboot server and also pin the DHCP server responsibility to the server.
+6. Go to the web interface for the netbootxyz docker image and download the OS images you are most likely to use
+7. Configure the boot.cfg settings change the live_endpoint to your server's IP
+8. After that, plug in your target device via an ethernet cable to your router and boot it up selecting the NIC as an option
+9. It will boot up with a netbootxyz page, from which you can select which OS you want to load. It will copy the OS image to ram via the ethernet cable
 
 ### Sources
 - [netbootxyz](https://netboot.xyz/)
