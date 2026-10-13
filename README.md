@@ -16,5 +16,37 @@ difficulty of managing a server while pursuing my degree away from my home.
 1. Max data throughput is bottlenecked by the devices you use. Even using fast NVME SSDs to create a NAS, if the machine has only a 100 Mbps network card, you can only get a max upload/download speed of 100Mbps
 2. Striping should never be utilized without parity for mission critical data. Striping increases performance at the cost of redundancy
 ### Sources
-[Hardware Havens](https://www.youtube.com/@HardwareHaven)
-[TrueNAS](https://www.truenas.com/)
+- [Hardware Havens](https://www.youtube.com/@HardwareHaven)
+- [TrueNAS](https://www.truenas.com/)
+
+## Pi-Hole Setup
+1. Install one of the recommended operating systems on your target server (I used debian linux in my case)
+2. Pin the IP address of the target server using the configuration of your router
+3. Start the installation command ```bash curl -sSL https://install.pi-hole.net | bash ``` on the target system
+4. Enable the admin interface and note down the username and pasword
+5. After the process is done, use a separate machine to log-in via the web interface
+6. After confirming the web interface works, open a new tab to any website with ads
+7. Confirm you are being shown advertisements, and for now, change your DNS server to the newly made Pi-Hole server
+8. On refreshing the page, all the ads should dissapear. You ca also check the web interface for the amount of requests blocked
+9. To set the configuration network wide, change the default/No. 1 DNS server of the router to the Pi-Hole Server and the secondary to the default ISP provided DNS server.
+
+### Sources
+- [Pi-Hole Docs](https://docs.pi-hole.net/main/basic-install/)
+- [Debian](https://www.debian.org/)
+
+## Netbootxyz Setup
+1. Install any supported linux distro on your netboot server with dnsmasq
+2. Configure dnsmasq by setting ```bash dhcp-option=66,"0.0.0.0" ``` and configure tftp using ```bash enable-tftp
+tftp-root=/var/lib/tftp
+dhcp-boot=netboot.xyz.kpxe ```
+3. Run the docker installation of the netbootxyz server image
+4. On the router settings, pin the IP address of the netboot server and also pin the DHCP server responsibility to the server.
+5. Go to the web interface for the netbootxyz docker image and download the OS images you are most likely to use
+6. Configure the boot.cfg settings change the live_endpoint to your server's IP
+7. After that, plug in your target device via an ethernet cable to your router and boot it up selecting the NIC as an option
+8. It will boot up with a netbootxyz page, from which you can select which OS you want to load. It will copy the OS image to ram via the ethernet cable
+
+### Sources
+- [netbootxyz](https://netboot.xyz/)
+- [Archwiki Dnsmasq page](https://wiki.archlinux.org/title/Dnsmasq#DHCP_server)
+  
